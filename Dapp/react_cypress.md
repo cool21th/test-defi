@@ -23,7 +23,13 @@ cypress, babel, cosmos , graphql, linqui
 
 davavat, ethersproject, gnosis.pm, popperjs
 
-typechain, 
+typechain, ajv , cids, copy-to-clipboard, cross-env, d3
+
+interui, jest-styled-components, luxon, microbundle, ms.macro, multicodec, multihands, node-vibrant
+
+polished, polyfill-object.frometries, qs, rebass, ua-parser-js, use-count-up, wcag-contrast, web-vitals
+
+workbox-core, workbox-precaching, workbox-routing
 
 [cypress](
 
@@ -130,3 +136,13 @@ main().catch(console.error)
 
 ``
 > yarn add --dev typechain
+
+
+[ajv](https://github.com/ajv-validator/ajv)
+
+The fastest JSON validator for Node.js and browser.
+
+[cids](https://github.com/multiformats/js-cid)
+This module has been superseded by the multiformats module
+
+> npm install --save cids
