@@ -9,6 +9,9 @@
 > yarn create react-app my-app
 
 
+
+
+
 Typescript
 > npx create-react-app my-app --template typescript
 
@@ -169,3 +172,30 @@ ua-parser-js
 
 > npm install --save-dev ua-parser-js
 > import * as uaParserJS from 'ua-parser-js';
+
+
+
+
+--------------------------------------------
+
+
+npx create-react-app my-app --template typescript
+
+
+원본 uniswap에서 package.json 이름외에 복붙
+
+src/abi, codegen.yml 복사 
+
+
+codegen init
+
+? What type of application are you building? Application built with React
+? Where is your schema?: (path or url) http://localhost:4000
+? Where are your operations and fragments?: src/**/!(*.d).{ts,tsx}
+? Pick plugins: TypeScript (required by other typescript plugins), TypeScript Operations (operations and frag
+ments)
+? Where to write the output: ./src/state/data/generated.ts
+? Do you want to generate an introspection file? No
+? How to name the config file? codegen.yml
+? What script in package.json should run the codegen? y
+
