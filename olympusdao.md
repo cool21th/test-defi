@@ -666,3 +666,31 @@ export class BaseContract {
 }
 
 ```
+
+
+
+### TresurayBalance 
+
+
+```javascript
+
+export class StableBond extends Bond {
+  readonly isLP = false;
+  readonly reserveContract: ethers.ContractInterface;
+  readonly displayUnits: string;
+
+  constructor(stableBondOpts: StableBondOpts) {
+    super(BondType.StableAsset, stableBondOpts);
+    // For stable bonds the display units are the same as the actual token
+    this.displayUnits = stableBondOpts.displayName;
+    this.reserveContract = ierc20Abi; // The Standard ierc20Abi since they're normal tokens
+  }
+
+  async getTreasuryBalance(networkID: NetworkID, provider: StaticJsonRpcProvider) {
+    let token = this.getContractForReserve(networkID, provider);
+    let tokenAmount = await token.balanceOf(addresses[networkID].TREASURY_ADDRESS);
+    return Number(tokenAmount.toString()) / Math.pow(10, 18);
+  }
+}
+
+```
