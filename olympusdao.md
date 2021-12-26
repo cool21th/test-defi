@@ -118,6 +118,32 @@ export async function getTokenPrice(tokenId = "olympus") {
   
   abstract reserveContract: ethers.ContractInterface; // Token ABI
   
+  
+export class LPBond extends Bond {
+  readonly isLP = true;
+  readonly lpUrl: string;
+  readonly reserveContract: ethers.ContractInterface;
+  readonly displayUnits: string;
+
+  constructor(lpBondOpts: LPBondOpts) {
+    super(BondType.LP, lpBondOpts);
+
+    this.lpUrl = lpBondOpts.lpUrl;
+    this.reserveContract = lpBondOpts.reserveContract;
+    this.displayUnits = "LP";
+  }
+  async getTreasuryBalance(networkID: NetworkID, provider: StaticJsonRpcProvider) {
+    const token = this.getContractForReserve(networkID, provider);
+    const tokenAddress = this.getAddressForReserve(networkID);
+    const bondCalculator = getBondCalculator(networkID, provider);
+    const tokenAmount = await token.balanceOf(addresses[networkID].TREASURY_ADDRESS);
+    const valuation = await bondCalculator.valuation(tokenAddress || "", tokenAmount);
+    const markdown = await bondCalculator.markdown(tokenAddress || "");
+    let tokenUSD = (Number(valuation.toString()) / Math.pow(10, 9)) * (Number(markdown.toString()) / Math.pow(10, 18));
+    return Number(tokenUSD.toString());
+  }
+}
+  
   ````
   
  2-1. ethers.Contract @ethersproject/contract/src.ts
