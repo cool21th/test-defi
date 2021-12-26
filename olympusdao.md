@@ -73,3 +73,19 @@ try {
   
  ```
  
+#### bond.ts
+
+```javascript
+
+  async getBondReservePrice(networkID: NetworkID, provider: StaticJsonRpcProvider | JsonRpcSigner) {
+    let marketPrice: number;
+    if (this.isLP) {
+      const pairContract = this.getContractForReserve(networkID, provider);
+      const reserves = await pairContract.getReserves();
+      marketPrice = Number(reserves[1].toString()) / Number(reserves[0].toString()) / 10 ** 9;
+    } else {
+      marketPrice = await getTokenPrice("convex-finance");
+    }
+    return marketPrice;
+  }
+```
