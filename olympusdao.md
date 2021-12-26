@@ -115,6 +115,9 @@ export async function getTokenPrice(tokenId = "olympus") {
     return new ethers.Contract(bondAddress, this.reserveContract, provider) as PairContract;
   }
   
+  
+  abstract reserveContract: ethers.ContractInterface; // Token ABI
+  
   ````
   
  2-1. ethers.Contract @ethersproject/contract/src.ts
